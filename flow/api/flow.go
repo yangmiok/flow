@@ -77,7 +77,7 @@ func FlowRecharge(ctx *gin.Context) {
     pid := ctx.PostForm("pid")
     orderid := utils.GetRandomString(6)
         //请求地址
-    juheURL :="http://op.juhe.cn/ofpay/mobile/onlineorder"
+    juheURL :="http://v.juhe.cn/flow/recharge"
  
     //初始化参数
     param:=url.Values{}
