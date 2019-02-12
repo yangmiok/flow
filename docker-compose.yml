@@ -1,6 +1,6 @@
 version: '3'
 services:
-  phoneapiservice:
+  flowapiservice:
     build: .
     ports:
     - "9002:8080"     # 绑定容器的8080端口到主机的9000端口
