@@ -3,7 +3,7 @@ services:
   phoneapiservice:
     build: .
     ports:
-    - "9001:8080"     # 绑定容器的8080端口到主机的9000端口
+    - "9002:8080"     # 绑定容器的8080端口到主机的9000端口
     # logging:
     #   driver: "fluentd"
     #   options:
