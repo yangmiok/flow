@@ -73,7 +73,44 @@ func FlowTelcheck(ctx *gin.Context) {
 
 //提交流量充值
 func FlowRecharge(ctx *gin.Context) {
+    phone := ctx.PostForm("phone")
+    pid := ctx.PostForm("pid")
+    orderid := utils.GetRandomString(6)
+        //请求地址
+    juheURL :="http://op.juhe.cn/ofpay/mobile/onlineorder"
+ 
+    //初始化参数
+    param:=url.Values{}
+    
+    //校验值，md5(OpenID+key+phoneno+cardnum+orderid)
+    sign := utils.MD5(OpenID+APPKEY+phoneno+pid+orderid)
 
+    //配置请求参数,方法内部已处理urlencode问题,中文参数可以直接传参
+    param.Set("phone",phone) //手机号码
+    param.Set("pid",pid) //流量套餐ID
+    param.Set("orderid",orderid) //商家订单号，8-32位字母数字组合
+    param.Set("key",APPKEY) //应用APPKEY(应用详细页查询)
+    param.Set("sign",sign) //校验值，md5(OpenID+key+phoneno+cardnum+orderid)，OpenID在个人中心查询
+ 
+ 
+    //发送请求
+    data,err:=utils.Post(juheURL,param)
+    if err!=nil{
+        fmt.Errorf("请求失败,错误信息:\r\n%v",err)
+        ctx.JSON(404, gin.H{
+            "code": "404",
+            "message": err,
+            })
+    }else{
+        var netReturn map[string]interface{}
+        json.Unmarshal(data,&netReturn)
+
+        ctx.JSON(200, gin.H{
+            "error_code": netReturn["error_code"],
+            "message": netReturn["reason"],
+            "result":netReturn["result"],
+        })
+    }
 
 }
 
