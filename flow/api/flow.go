@@ -41,13 +41,13 @@ func FlowList(ctx *gin.Context) {
 //根据手机号码获取支持的流量套餐
 func FlowTelcheck(ctx *gin.Context) {
     //获取请求参数
-    phoneno := ctx.PostForm("phoneno")
+    phone := ctx.PostForm("phone")
     //请求地址
     juheURL :="http://v.juhe.cn/flow/telcheck"
     //初始化参数
     param:=url.Values{}
     //配置请求参数,方法内部已处理urlencode问题,中文参数可以直接传参
-    param.Set("phoneno",phoneno) //手机号码
+    param.Set("phone",phone) //手机号码
     param.Set("key",APPKEY) //应用APPKEY(应用详细页查询)
  
     //发送请求
