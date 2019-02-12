@@ -10,7 +10,10 @@ import (
 func main() {
 	r := gin.New()
 	
-	r.POST("/flow/list", api.Flowlist)
+	r.POST("/flow/list", api.FlowList)
+	r.POST("/flow/telcheck", api.FlowTelcheck)
+	r.POST("/flow/recharge", api.FlowRecharge)
+	r.POST("/flow/ordersta", api.FlowOrdersta)
 
 	r.Run()
 }
