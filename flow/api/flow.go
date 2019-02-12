@@ -83,7 +83,7 @@ func FlowRecharge(ctx *gin.Context) {
     param:=url.Values{}
     
     //校验值，md5(OpenID+key+phoneno+cardnum+orderid)
-    sign := utils.MD5(OpenID+APPKEY+phoneno+pid+orderid)
+    sign := utils.MD5(OpenID+APPKEY+phone+pid+orderid)
 
     //配置请求参数,方法内部已处理urlencode问题,中文参数可以直接传参
     param.Set("phone",phone) //手机号码
